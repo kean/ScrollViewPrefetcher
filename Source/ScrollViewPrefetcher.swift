@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-public protocol ScrollViewPrefetcherDelegate: class {
+public protocol ScrollViewPrefetcherDelegate: AnyObject {
     /// Returns all valid indices for the collection.
     func getAllIndicesForPrefetcher(_ prefetcher: ScrollViewPrefetcher) -> Range<Int>
     func prefetcher(_ prefetcher: ScrollViewPrefetcher, prefetchItemsAt indices: [Int])
@@ -73,7 +73,7 @@ public final class ScrollViewPrefetcher {
 
         prefetchWindow = newPrefetchWindow
 
-        let allIndices = Set(delegate?.getAllIndicesForPefetcher(self) ?? 0..<0)
+        let allIndices = Set(delegate?.getAllIndicesForPrefetcher(self) ?? 0..<0)
 
         let removedIndicides = oldPrefetchIndices
             .subtracting(newPrefetchIndices)
